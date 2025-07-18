@@ -28,19 +28,7 @@ API RESTful escrita em **Go (Golang)** usando o framework **Gin** com integraç�
 
 ## 📁 Estrutura do Projeto
 
-PostGo/
-│
-├── config/ # Configuração de conexão com o banco
-├── controllers/ # Camada de controle (handlers)
-├── services/ # Lógica de negócios
-├── models/ # Estruturas e entidades do banco
-├── routes/ # Rotas da API
-├── utils/ # Funções utilitárias e helpers
-├── docs/ # Swagger gerado automaticamente
-├── main.go # Ponto de entrada
-└── go.mod / go.sum # Gerenciamento de dependências
-
-
+<img width="574" height="390" alt="image" src="https://github.com/user-attachments/assets/c761c16e-4104-4957-aeb9-fc3c1c9d051b" />
 ---
 
 ## ▶️ Como Executar o Projeto

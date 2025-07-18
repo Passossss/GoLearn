@@ -10,7 +10,7 @@ import (
 func AppRoutes(router *gin.Engine, db *gorm.DB) {
 	postController := controllers.NewPostController(db)
 
-	api := router.Group("/api/posts")
+	api := router.Group("/api/post")
 	{
 		api.GET("/", postController.GetPosts)
 		api.GET("/:id", postController.GetPostByID)

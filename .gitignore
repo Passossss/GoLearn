@@ -1,0 +1,18 @@
+.database.go
+*database.go
+
+postgo.exe
+
+# Binários
+*.exe
+*.out
+*.test
+
+# Arquivos temporários ou locais
+*.log
+*.tmp
+
+# Go
+/vendor/
+/bin/
+/dist/

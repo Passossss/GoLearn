@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app-go:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: go-app-container
+    ports:
+      - "3001:3001"
+    environment:
+      SQL_SERVER_CONNECTION_STRING: "sqlserver://sa:{{{escondendo-senhs}}}@sql-server-db:1433?database=PostGo"
+    depends_on:
+      - sql-server-db
+    restart: always
+
+  sql-server-db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sql-server-container
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "180855aaAA@@@"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    restart: always
+
+volumes:
+  sqlserver_data:

@@ -66,6 +66,11 @@ swag init
 go run main.go
 ```
 
+6. swag init para criar as pastas /docs do swagger
+```
+swag init
+```
+
 A API estará disponível em: http://localhost:3001
 
 📘 Documentação Swagger

@@ -1,4 +1,181 @@
+basePath: /api
+definitions:
+  models.Post:
+    properties:
+      content:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+    type: object
+  utils.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  utils.SuccessResponse:
+    properties:
+      data: {}
+      message:
+        type: string
+    type: object
+host: localhost:3001
 info:
   contact: {}
-paths: {}
+  description: Uma API de exemplo para gerenciamento de posts em Go com Gin e GORM.
+  title: PostGo API
+  version: "1.0"
+paths:
+  /post:
+    get:
+      description: Obtém uma lista de todos os posts disponíveis.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Lista de posts retornada com sucesso
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.SuccessResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Post'
+                  type: array
+              type: object
+        "500":
+          description: Erro interno do servidor
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Lista todos os posts
+      tags:
+      - Posts
+    post:
+      consumes:
+      - application/json
+      description: Adiciona um novo post ao banco de dados.
+      parameters:
+      - description: Dados do Post para criar
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/models.Post'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Post criado com sucesso
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Post'
+              type: object
+        "400":
+          description: Dados inválidos
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Erro interno do servidor
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Cria um novo post
+      tags:
+      - Posts
+  /post/{id}:
+    delete:
+      description: Exclui um post específico pelo seu ID.
+      parameters:
+      - description: ID do Post
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Post excluído com sucesso
+          schema:
+            $ref: '#/definitions/utils.SuccessResponse'
+        "500":
+          description: Erro ao excluir post
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Exclui um post
+      tags:
+      - Posts
+    get:
+      description: Obtém os detalhes de um post específico pelo seu ID.
+      parameters:
+      - description: ID do Post
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Post encontrado com sucesso
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Post'
+              type: object
+        "404":
+          description: Post não encontrado
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Erro interno do servidor
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Obtém um post por ID
+      tags:
+      - Posts
+    put:
+      consumes:
+      - application/json
+      description: Atualiza os dados de um post específico pelo seu ID.
+      parameters:
+      - description: ID do Post
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Novos dados do Post
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/models.Post'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Post atualizado com sucesso
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Post'
+              type: object
+        "400":
+          description: Dados inválidos
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Erro ao atualizar post
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Atualiza um post existente
+      tags:
+      - Posts
 swagger: "2.0"

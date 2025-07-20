@@ -1,3 +1,4 @@
+// utils/response.go
 package utils
 
 import (
@@ -6,23 +7,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Response struct {
-	Success bool        `json:"success"`
+type SuccessResponse struct {
 	Message string      `json:"message"`
 	Data    interface{} `json:"data,omitempty"`
 }
 
-func JSONSuccess(c *gin.Context, message string, data interface{}) {
-	c.JSON(http.StatusOK, Response{
-		Success: true,
-		Message: message,
-		Data:    data,
-	})
+type ErrorResponse struct {
+	Error string `json:"error"`
 }
 
-func JSONError(c *gin.Context, status int, message string) {
-	c.JSON(status, Response{
-		Success: false,
-		Message: message,
-	})
+func JSONSuccess(c *gin.Context, message string, data interface{}) {
+	c.JSON(http.StatusOK, SuccessResponse{Message: message, Data: data})
+}
+
+func JSONError(c *gin.Context, statusCode int, errMessage string) {
+	c.JSON(statusCode, ErrorResponse{Error: errMessage})
 }

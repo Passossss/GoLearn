@@ -1,6 +1,6 @@
 # 🚀 PostGo API
 
-API RESTful escrita em **Go (Golang)** usando o framework **Gin** com integração ao banco de dados via **GORM**, seguindo arquitetura MVC. A aplicação será consumida por um frontend feito em **Angular**.
+API RESTful escrita em **Go (Golang)** usando o framework **Gin** com integração ao banco de dados via **GORM**, seguindo arquitetura SOLID. A aplicação será consumida por um frontend feito em **Angular**.
 
 ---
 
@@ -72,3 +72,8 @@ A API estará disponível em: http://localhost:3001
 Após rodar o projeto, acesse:
 
 http://localhost:3001/swagger/index.html
+
+Caso seja necessario:
+```
+CREATE DATABASE PostGo;
+```

@@ -5,3 +5,7 @@ type Post struct {
 	Title   string `json:"title"`
 	Content string `json:"content"`
 }
+
+func (Post) TableName() string {
+	return "posts"
+}
